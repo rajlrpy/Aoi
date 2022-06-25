@@ -135,8 +135,7 @@ final class ProductTable extends PowerGridComponent
                 ->sortable()
                 ->makeInputDatePicker(),
 
-        ]
-;
+        ];
     }
 
     /*
