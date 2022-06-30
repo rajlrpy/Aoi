@@ -15,6 +15,18 @@
                         <form class="user submit" action="{{ route('products.store') }}" method="POST">
                             @csrf
                             <div class="form-group">
+                                <select class="selectpicker" name='category_id' data-size="3" data-live-search="true" title="Select Category"  required>
+                                    @foreach ($categories as $category)
+                                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                    @endforeach
+                                </select>
+                                @error('category_id')
+                                        <div class="text-danger text-center" >
+                                            {{ $message }}
+                                        </div>
+                                @enderror
+                            </div>
+                            <div class="form-group">
                                 <input type="name" class="form-control form-control-user" name="name"
                                     placeholder="Enter the Product Name " value = "{{ old('name') }}" required>
                                     @error('name')

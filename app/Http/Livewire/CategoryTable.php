@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Builder;
 use PowerComponents\LivewirePowerGrid\Rules\{Rule, RuleActions};
 use PowerComponents\LivewirePowerGrid\Traits\ActionButton;
 use PowerComponents\LivewirePowerGrid\{Button, Column, Exportable, Footer, Header, PowerGrid, PowerGridComponent, PowerGridEloquent};
+use App\Classes\PowergridExtented;
 
 final class CategoryTable extends PowerGridComponent
 {
@@ -92,7 +93,7 @@ final class CategoryTable extends PowerGridComponent
     /*
     |--------------------------------------------------------------------------
     |  Include Columns
-    |--------------------------------------------------------------------------
+    |-------------------------------------PowergridExtented-------------------------------------
     | Include the columns added columns, making them visible on the Table.
     | Each column can be configured with properties, filters, actions...
     |
@@ -137,7 +138,6 @@ final class CategoryTable extends PowerGridComponent
     | Enable the method below only if the Routes below are defined in your app.
     |
     */
-
      /**
      * PowerGrid Category Action Buttons.
      *
@@ -148,12 +148,12 @@ final class CategoryTable extends PowerGridComponent
     public function actions(): array
     {
        return [
-           Button::make('edit', 'Edit')
+            PowergridExtented::make('edit', 'Edit')
                 ->target('')
                 ->class('btn btn-outline-secondary btn-sm fa fa-edit')
                 ->route('category.edit', ['category' => 'id']),
 
-           Button::make('destroy', 'Delete')
+            Button::make('destroy', 'Delete')
                 ->target('')
                 ->class('btn btn-outline-danger btn-sm fa fa-trash-alt')
                 ->route('category.destroy', ['category' => 'id'])

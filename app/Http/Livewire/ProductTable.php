@@ -91,8 +91,8 @@ final class ProductTable extends PowerGridComponent
             ->addColumn('name')
             ->addColumn('category_id',fn (Product $product) => ($product->category->name))
             ->addColumn('status')
-            ->addColumn('created_at_formatted', fn (Product $model) => Carbon::parse($model->created_at)->format('d/m/Y H:i:s'))
-            ->addColumn('updated_at_formatted', fn (Product $model) => Carbon::parse($model->updated_at)->format('d/m/Y H:i:s'));
+            ->addColumn('created_at_formatted', fn (Product $model) => Carbon::parse($model->created_at)->format('d/m/Y'))
+            ->addColumn('updated_at_formatted', fn (Product $model) => Carbon::parse($model->updated_at)->format('d/m/Y'));
     }
 
     /*
@@ -115,12 +115,15 @@ final class ProductTable extends PowerGridComponent
             Column::make('ID', 'id')
                 ->makeInputRange(),
 
-            Column::make('NAME', 'name')
+            Column::make('PRODUCT NAME', 'name')
+                ->sortable()
+                ->searchable()              
+                ->makeInputText(),
+
+            Column::make('CATEGORY NAME', 'category_id')
                 ->sortable()
                 ->searchable()
                 ->makeInputText(),
-
-            Column::make('CATEGORY NAME', 'category_id'),
 
             Column::make('STATUS', 'status')
                 ->toggleable(),
@@ -152,21 +155,26 @@ final class ProductTable extends PowerGridComponent
      * @return array<int, Button>
      */
 
-    /*
+    
     public function actions(): array
     {
        return [
            Button::make('edit', 'Edit')
-               ->class('bg-indigo-500 cursor-pointer text-white px-3 py-2.5 m-1 rounded text-sm')
-               ->route('product.edit', ['product' => 'id']),
+           ->target('')
+            // ->class('bg-indigo-500 cursor-pointer text-white px-3 py-2.5 m-1 rounded text-sm')
+
+           ->class('btn btn-outline-secondary btn-sm fa fa-edit')
+           ->route('products.edit', ['product' => 'id']),
 
            Button::make('destroy', 'Delete')
-               ->class('bg-red-500 cursor-pointer text-white px-3 py-2 m-1 rounded text-sm')
-               ->route('product.destroy', ['product' => 'id'])
-               ->method('delete')
+           ->target('')
+           
+           ->class('btn btn-outline-danger btn-sm fa fa-trash-alt delete')
+            ->route('products.show', ['product' => 'id'])
+            // ->method('get'),
         ];
     }
-    */
+    
 
     /*
     |--------------------------------------------------------------------------

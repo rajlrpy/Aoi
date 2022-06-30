@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\frontend\ChartController;
 use App\Http\Controllers\frontend\IndexController;
 use App\Http\Controllers\frontend\LoginController;
@@ -24,6 +25,7 @@ Route::group(['middleware'=>'auth', 'prefix'=>'/admin'], function(){
     Route::resource('employee','\App\Http\Controllers\frontend\EmployeeController');
     Route::get('/chart',[ChartController::class,'index'])->name('admin.chart');
     Route::get('/product',[ProductController::class,'index'])->name('admin.product');
+    Route::get('/product',[ProductController::class,'exportxl'])->name('admin.exportProduct');
     Route::resource('category', '\App\Http\Controllers\admin\CategoryController');
     Route::resource('products', '\App\Http\Controllers\admin\ProductController');
 });

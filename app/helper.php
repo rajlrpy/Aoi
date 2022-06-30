@@ -9,3 +9,4 @@ function displayAlert()
          return sprintf('<script>toastr.%s("%s")</script>', $type, $message);
         }
 }
+

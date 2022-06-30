@@ -9,12 +9,25 @@
                 <!-- Basic Card Example -->
                 <div class="card shadow-lg mb-4 border-left-primary border-right-primary" >
                     <div class="card-header py-3">
-                        <h1 class="m-0 font-weight-bold text-primary text-center">Edit Products</h1>
+                        <h1 class="m-0 font-weight-bold text-primary text-center">Update Products</h1>
                     </div>
                     <div class="card-body">
                         <form class="user submit" action="{{ route('products.update', $product )}}" method="POST">
                             @csrf
                             @method('PATCH')
+                            <div class="form-group">
+                                <select class="selectpicker" name='category_id' data-size="3" data-live-search="true" title="Select Category"  required>
+                                    <option value="{{ $product->category->id }}" selected > {{ $product->category->name }}</option>
+                                    @foreach ($categories as $category)
+                                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                    @endforeach
+                                </select>
+                                @error('category_id')
+                                        <div class="text-danger text-center" >
+                                            {{ $message }}
+                                        </div>
+                                @enderror
+                            </div>
                             <div class="form-group">
                                 <input type="name" class="form-control form-control-user" name="name"
                                     placeholder="Enter the Product Name " value = "{{ $product->name }}" required>
