@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Builder;
 use PowerComponents\LivewirePowerGrid\Rules\{Rule, RuleActions};
 use PowerComponents\LivewirePowerGrid\Traits\ActionButton;
 use PowerComponents\LivewirePowerGrid\{Button, Column, Exportable, Footer, Header, PowerGrid, PowerGridComponent, PowerGridEloquent};
-use App\Classes\PowergridExtented;
 
 final class CategoryTable extends PowerGridComponent
 {
@@ -148,7 +147,7 @@ final class CategoryTable extends PowerGridComponent
     public function actions(): array
     {
        return [
-            PowergridExtented::make('edit', 'Edit')
+            Button::make('edit', 'Edit')
                 ->target('')
                 ->class('btn btn-outline-secondary btn-sm fa fa-edit')
                 ->route('category.edit', ['category' => 'id']),

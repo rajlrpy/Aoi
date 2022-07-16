@@ -14,9 +14,9 @@ use PDF;
 
 class ProductController extends Controller
 {
-   
+
     public function index(){
-        
+
         // return $dataTable->render('frontend.admin.products');
 
         if(request()->ajax()) {

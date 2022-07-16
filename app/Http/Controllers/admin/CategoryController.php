@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\admin;
 
+use App\Events\CategoryCreated;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
@@ -42,6 +43,10 @@ class CategoryController extends Controller
         $category->name = $request->name;
         $category->icon = $fileName;
         $category->save();
+
+        $data = ['Title'=>$category->name, 'Created At'=>now()];
+        event(new CategoryCreated($data));
+
         return redirect(route('category.index'))->with('message','success|'.$request->name.' Added Successfully!');
     }
 
@@ -68,6 +73,12 @@ class CategoryController extends Controller
     }
 
     public function destroy(Category $category){
+        $fileName=$category->icon;
+        $image_path = "/storage/images/".$fileName;  // prev image path
+        if( File::exists(public_path($image_path)) ) {
+            File::delete(public_path($image_path));
+        }
+
         $category->delete();
         return redirect(route('category.index'))->with('message','error|Category Deleted Successfully!!');
     }

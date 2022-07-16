@@ -45,5 +45,3 @@ Route::get('/', function (){
 
 // Routes for Testing
 
-
-Route::get('/getperson',[PersonController::class,'index']);
